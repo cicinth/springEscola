@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
@@ -28,7 +29,7 @@ public class AlunoController {
 
     @PostMapping()
     public ResponseEntity<AlunoResponse> cadastrar(
-            @RequestBody AlunoRequest alunoRequest,
+            @RequestBody @Valid AlunoRequest alunoRequest,
             UriComponentsBuilder uriComponentsBuilder
     ){
         AlunoResponse alunoResponse = alunoService.adicionar(alunoRequest);
@@ -37,7 +38,7 @@ public class AlunoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> buscarAluno(@PathVariable UUID id){
+    public ResponseEntity<?> buscarAluno(@PathVariable UUID id) throws ItemNaoExistenteException {
         return ResponseEntity.ok(alunoService.localizar(id));
     }
 

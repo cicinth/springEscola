@@ -30,8 +30,12 @@ public abstract class MemoryRepository<K,E> {
         return item;
     }
 
-    public E localizar(K chave) {
-        return dados.get(chave);
+    public E localizar(K chave) throws ItemNaoExistenteException {
+        E dado = dados.get(chave);
+        if(dado == null){
+            throw new ItemNaoExistenteException();
+        }
+        return dado;
     }
 
     public List<E> listar() {

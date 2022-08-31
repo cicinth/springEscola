@@ -41,7 +41,7 @@ public class AlunoService {
         return mapper.mapAluno(repository.listar());
     }
 
-    public AlunoResponse localizar(UUID id) {
+    public AlunoResponse localizar(UUID id) throws ItemNaoExistenteException {
         return mapper.toResponse(repository.localizar(id));
     }
 
